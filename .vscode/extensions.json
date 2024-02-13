@@ -2,6 +2,7 @@
     "recommendations": [
         "tamasfe.even-better-toml",
         "rust-lang.rust-analyzer",
-        "1yib.rust-bundle"
+        "1yib.rust-bundle",
+        "editorconfig.editorconfig"
     ]
 }

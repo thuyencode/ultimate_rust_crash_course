@@ -1,0 +1,24 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "exercise/a_variables"
+    },
+    {
+      "path": "exercise/b_functions"
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true
+  },
+  "extensions": {
+    "recommendations": [
+      "tamasfe.even-better-toml",
+      "rust-lang.rust-analyzer",
+      "1yib.rust-bundle",
+      "editorconfig.editorconfig"
+    ]
+  }
+}

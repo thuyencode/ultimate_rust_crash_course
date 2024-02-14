@@ -17,11 +17,7 @@ pub fn change(arg: &mut String) {
 }
 
 pub fn eat(arg: String) -> bool {
-  if arg.starts_with("b") && arg.contains("a") {
-    true
-  } else {
-    false
-  }
+  arg.starts_with("b") && arg.contains("a")
 }
 
 pub fn bedazzle(s: &mut String) {

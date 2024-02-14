@@ -2,19 +2,16 @@
   "folders": [
     {
       "path": "."
-    },
-    {
-      "path": "exercise/a_variables"
-    },
-    {
-      "path": "exercise/b_functions"
-    },
-    {
-      "path": "exercise/c_simple_types"
     }
   ],
   "settings": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "rust-analyzer.linkedProjects": [
+      "exercise/a_variables/Cargo.toml",
+      "exercise/b_functions/Cargo.toml",
+      "exercise/c_simple_types/Cargo.toml",
+      "exercise/d_control_flow_strings/Cargo.toml"
+    ]
   },
   "extensions": {
     "recommendations": [

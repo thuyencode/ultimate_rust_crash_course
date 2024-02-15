@@ -11,7 +11,8 @@
       "exercise/b_functions/Cargo.toml",
       "exercise/c_simple_types/Cargo.toml",
       "exercise/d_control_flow_strings/Cargo.toml",
-      "exercise/e_ownership_references/Cargo.toml"
+      "exercise/e_ownership_references/Cargo.toml",
+      "exercise/f_structs_traits/Cargo.toml"
     ]
   },
   "extensions": {

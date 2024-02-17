@@ -14,7 +14,8 @@
       "exercise/e_ownership_references/Cargo.toml",
       "exercise/f_structs_traits/Cargo.toml",
       "exercise/g_collections_enums/Cargo.toml",
-      "exercise/h_closures_threads/Cargo.toml"
+      "exercise/h_closures_threads/Cargo.toml",
+      "invaders/Cargo.toml"
     ]
   },
   "extensions": {

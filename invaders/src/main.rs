@@ -14,7 +14,11 @@ use crossterm::{
   terminal::{self, EnterAlternateScreen, LeaveAlternateScreen},
   ExecutableCommand,
 };
-use invaders::{frame, render};
+use invaders::{
+  frame::{self, Drawable},
+  player::Player,
+  render,
+};
 use rusty_audio::Audio;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -79,9 +83,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
   });
 
   // Game loop
+  let mut player = Player::new();
+
   'gameloop: loop {
     // Per-frame init
-    let current_frame = frame::new_frame();
+    let mut current_frame = frame::new_frame();
 
     // Input
     while event::poll(Duration::default())? {
@@ -91,12 +97,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             audio.play("lose.wav");
             break 'gameloop;
           }
+          KeyCode::Left => player.move_left(),
+          KeyCode::Right => player.move_right(),
           _ => {}
         }
       }
     }
 
     // Draw and render
+    player.draw(&mut current_frame);
     let _ = render_tx.send(current_frame);
 
     thread::sleep(Duration::from_millis(5));

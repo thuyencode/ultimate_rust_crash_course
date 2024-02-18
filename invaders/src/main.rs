@@ -5,7 +5,7 @@ use std::{
   path::PathBuf,
   sync::mpsc,
   thread,
-  time::Duration,
+  time::{Duration, Instant},
 };
 
 use crossterm::{
@@ -83,11 +83,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
   });
 
   // Game loop
-  let mut player = Player::new();
+  let mut player: Player = Player::new();
+  let mut instant: Instant = Instant::now();
 
   'gameloop: loop {
     // Per-frame init
-    let mut current_frame = frame::new_frame();
+    let mut current_frame: Vec<Vec<&str>> = frame::new_frame();
+    let duration: Duration = instant.elapsed();
+
+    instant = Instant::now();
 
     // Input
     while event::poll(Duration::default())? {
@@ -99,10 +103,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
           }
           KeyCode::Left => player.move_left(),
           KeyCode::Right => player.move_right(),
+          KeyCode::Enter | KeyCode::Char(' ') => {
+            if player.shoot() {
+              audio.play("pew.wav");
+            }
+          }
           _ => {}
         }
       }
     }
+
+    // Updates
+    player.update(duration);
 
     // Draw and render
     player.draw(&mut current_frame);

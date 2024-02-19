@@ -17,7 +17,7 @@ enum Shot {
 
 impl Shot {
   // Here is a method for the `Shot` enum you just defined.
-  fn points(self: &Self) -> i32 {
+  fn points(&self) -> i32 {
     // 1b. Implement this method to convert a Shot into points
     // - return 5 points if `self` is a `Shot::Bullseye`
     // - return 2 points if `self` is a `Shot::Hit(x)` where x < 3.0

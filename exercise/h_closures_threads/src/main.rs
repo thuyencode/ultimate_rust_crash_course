@@ -32,7 +32,7 @@ fn main() {
   let handle: thread::JoinHandle<i32> = spawn(move || expensive_sum(my_vector));
 
   // While the child thread is running, the main thread will also do some work
-  for letter in vec!["a", "b", "c", "d", "e", "f"] {
+  for letter in ["a", "b", "c", "d", "e", "f"] {
     println!("Main thread: Letter {}", letter);
     pause_ms(200);
   }

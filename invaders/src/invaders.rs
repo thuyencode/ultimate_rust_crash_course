@@ -1,3 +1,5 @@
+#![allow(clippy::new_without_default)]
+
 use crate::{
   frame::{Drawable, Frame},
   NUM_COLS, NUM_ROWS,

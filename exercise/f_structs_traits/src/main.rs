@@ -5,7 +5,7 @@
 // `cargo run` without any errors.
 //
 trait Bite {
-  fn bite(self: &mut Self);
+  fn bite(&mut self);
 }
 
 // 2. Now create a struct named Grapes with a field that tracks how many grapes are left.  If you
@@ -21,7 +21,7 @@ struct Grapes {
 // If you need a hint, look at how it was done for Carrot at the bottom of this file.
 //
 impl Bite for Grapes {
-  fn bite(self: &mut Self) {
+  fn bite(&mut self) {
     self.amount_left -= 1;
   }
 }
@@ -58,7 +58,7 @@ struct Carrot {
 }
 
 impl Bite for Carrot {
-  fn bite(self: &mut Self) {
+  fn bite(&mut self) {
     // Eat 20% of the remaining carrot. It may take awhile to eat it all...
     self.percent_left *= 0.8;
   }

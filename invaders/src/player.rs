@@ -1,3 +1,5 @@
+#![allow(clippy::new_without_default)]
+
 use std::time::Duration;
 
 use crate::{
@@ -55,11 +57,9 @@ impl Player {
     let mut hit_something: bool = false;
 
     self.shots.iter_mut().for_each(|shot| {
-      if !shot.exploding {
-        if invaders.kill_invader_at(shot.x, shot.y) {
-          hit_something = true;
-          shot.explode();
-        }
+      if !shot.exploding && invaders.kill_invader_at(shot.x, shot.y) {
+        hit_something = true;
+        shot.explode();
       }
     });
 

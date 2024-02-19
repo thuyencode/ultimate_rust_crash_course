@@ -16,7 +16,8 @@
       "exercise/g_collections_enums/Cargo.toml",
       "exercise/h_closures_threads/Cargo.toml",
       "invaders/Cargo.toml"
-    ]
+    ],
+    "rust-analyzer.check.command": "clippy"
   },
   "extensions": {
     "recommendations": [

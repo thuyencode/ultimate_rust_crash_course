@@ -1,13 +1,3 @@
-use std::{
-  env::current_dir,
-  fs::{read_dir, ReadDir},
-  io::{self, Error},
-  path::PathBuf,
-  sync::mpsc,
-  thread,
-  time::{Duration, Instant},
-};
-
 use crossterm::{
   cursor::{Hide, Show},
   event::{self, Event, KeyCode},
@@ -21,21 +11,30 @@ use invaders::{
   render,
 };
 use rusty_audio::Audio;
+use std::{
+  env::current_dir,
+  fs::{read_dir, ReadDir},
+  io::{self, Error},
+  path::PathBuf,
+  sync::mpsc,
+  thread,
+  time::{Duration, Instant},
+};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
   // Get the current working directory
   let current_dir: Result<PathBuf, Error> = current_dir();
 
-  if !current_dir.is_ok() {
-    return Err(current_dir.unwrap_err().into());
+  if let Err(err) = current_dir {
+    return Err(err.into());
   }
 
   // Get the list of files inside the "sounds" folder
   let audio_files: Result<ReadDir, Error> =
     read_dir(format!("{}/sounds", current_dir.unwrap().to_string_lossy()));
 
-  if !audio_files.is_ok() {
-    return Err(audio_files.unwrap_err().into());
+  if let Err(err) = audio_files {
+    return Err(err.into());
   }
 
   // Add all the audio files into audio
@@ -71,14 +70,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     render::render(&mut stdout, &last_frame, &last_frame, true);
 
-    loop {
-      let current_frame: Vec<Vec<&str>> = match render_rx.recv() {
-        Ok(x) => x,
-        Err(_) => break,
-      };
-
+    while let Ok(current_frame) = render_rx.recv() {
       render::render(&mut stdout, &last_frame, &current_frame, false);
-
       last_frame = current_frame;
     }
   });

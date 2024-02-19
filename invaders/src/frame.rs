@@ -1,3 +1,5 @@
+#![allow(clippy::same_item_push)]
+
 use crate::{NUM_COLS, NUM_ROWS};
 
 pub type Frame = Vec<Vec<&'static str>>;

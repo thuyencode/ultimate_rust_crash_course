@@ -122,6 +122,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
       audio.play("move.wav");
     }
 
+    if player.detect_hits(&mut invaders) {
+      audio.play("explode.wav");
+    }
+
     // Draw and render
     let drawables: Vec<&dyn Drawable> = vec![&player, &invaders];
 
@@ -132,6 +136,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let _ = render_tx.send(current_frame);
 
     thread::sleep(Duration::from_millis(5));
+
+    // Win or lose
+    if invaders.all_killed() {
+      audio.play("win.wav");
+      break 'gameloop;
+    }
+
+    if invaders.reached_bottom() {
+      audio.play("lose.wav");
+      break 'gameloop;
+    }
   }
   // Cleanup
   drop(render_tx);
